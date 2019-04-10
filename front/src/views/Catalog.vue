@@ -1,12 +1,17 @@
 <template>
     <div>
-        Catalog
+        <SearchArea />
     </div>
 </template>
 
 <script>
+import SearchArea from '../components/SearchArea'
+
 export default {
-    name: 'catalog'
+    name: 'catalog',
+    components: {
+        SearchArea
+    }
 
 }
 </script>

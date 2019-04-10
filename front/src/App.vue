@@ -1,25 +1,31 @@
 <template>
     <div id="app">
-        <v-container fluid fill-height pa-0>
-            <v-layout row>
-                <v-flex xs2>
-                    <MenuLeft />
-                </v-flex>
-                <v-flex>
-                    <router-view :key="1"/>
-                </v-flex>
-            </v-layout>
-        </v-container>
+        <v-app id="inspire" dark>
+
+            <Drawer ref="drawer"/>
+            
+            <Toolbar @toggleDrawer="$refs.drawer.toggleDrawer()"/>
+
+            <Views />
+
+            <Vfooter />
+        </v-app>
     </div>
 </template>
 
 <script>
-import MenuLeft from './menu/MenuLeft.vue'
+import Drawer from '@/menu/Drawer'
+import Toolbar from '@/header/Toolbar'
+import Views from '@/views/Views'
+import Vfooter from '@/footer/Vfooter'
 
 export default {
     name: 'app',
     components: {
-        MenuLeft
+        Drawer,
+        Toolbar,
+        Views,
+        Vfooter
     }
 }
 </script>
