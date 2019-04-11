@@ -3,7 +3,7 @@
         <v-container fluid fill-height>
             <v-layout>
                 <v-flex>
-                    <router-view key="routerView"/>
+                    <router-view key="routerView" />
                 </v-flex>
             </v-layout>
         </v-container>
@@ -13,7 +13,6 @@
 <script>
 export default {
     name: 'views'
-
 }
 </script>
 

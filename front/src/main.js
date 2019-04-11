@@ -13,6 +13,11 @@ Vue.use(Vuetify, {
     }
 })
 
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
+
 import VueRouter from 'vue-router'
 
 import Catalog from './views/Catalog.vue'

@@ -2,7 +2,7 @@
     <v-container>
         <v-layout row justify-center>
             <v-flex v-for="item in menu" :key="item.title" shrink>
-                <v-btn flat router :to="item.path">
+                <v-btn flat router :to="item.path" @click="$refs.rangeSelectors.resetRangesChoices()">
                     {{ item.title }}
                 </v-btn>
             </v-flex>
@@ -23,7 +23,7 @@
                 </v-menu>
             </v-flex>
 
-            <RangeSelectors />
+            <RangeSelectors ref="rangeSelectors" @submit="emitSubmit"/>
 
             <v-flex :class="[ $route.params.sort === 'all' ? 'xs10 md7 mx-5 mt-1' : 'xs2' ]" >
                 <v-text-field prepend-icon="search" label="Search" v-model="searchInput" @click="$router.push('/catalog/all')"></v-text-field>
@@ -52,7 +52,12 @@ export default {
                 { title: 'desc' },
                 { title: 'asc' }
             ],
-            searchInput: ''
+            searchInput: '',
+        }
+    },
+    methods: {
+        emitSubmit (selectorName, selectorRange) {
+            this.$emit('submit', selectorName, selectorRange)
         }
     }
 }
