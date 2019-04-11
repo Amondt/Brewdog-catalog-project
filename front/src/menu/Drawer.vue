@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer hide-overlay clipped fixed v-model="drawer" :mini-variant="mini" app>
+    <v-navigation-drawer clipped fixed v-model="drawer" :mini-variant="mini" app>
 
         <v-list class="mt-1">
             <v-list-tile v-if="mini" @click.stop="mini = !mini">
@@ -21,7 +21,7 @@
         </v-list>
 
         <v-list>
-            <v-list-tile v-for="item in menu" :key="item.name" router :to="item.path" @click.stop="toggleDrawer">
+            <v-list-tile v-for="item in menu" :key="item.name" router :to="item.path" @click.stop="mini = true">
                 <v-list-tile-action>
                     <v-icon>{{ item.icon }}</v-icon>
                 </v-list-tile-action>
@@ -41,7 +41,7 @@ export default {
             drawer: false,
             mini: false,
             menu: [
-                { name: 'Catalog', icon: 'search', path: '/catalog' },
+                { name: 'Catalog', icon: 'folder', path: '/catalog/all' },
                 { name: 'About', icon: 'weekend', path: '/about' }
             ]
         }

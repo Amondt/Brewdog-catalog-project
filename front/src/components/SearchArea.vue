@@ -1,19 +1,60 @@
 <template>
     <v-container>
-        <v-layout row wrap>
-            <v-flex xs12 sm6 md3>
-                <v-text-field label="Regular">
-                    
-                </v-text-field>
+        <v-layout row justify-center>
+            <v-flex v-for="item in menu" :key="item.title" shrink>
+                <v-btn flat router :to="item.path">
+                    {{ item.title }}
+                </v-btn>
+            </v-flex>
+        </v-layout>
+
+        <v-layout class="mt-3">
+            <v-flex xs2>
+                <v-menu offset-y class="mt-1">
+                    <v-btn flat slot="activator">
+                        <span>Sort</span>
+                        <v-icon>expand_more</v-icon>
+                    </v-btn>
+                    <v-list>
+                        <v-list-tile v-for="item in sortMenu" :key="item.title" @click="console.log('clicked')">
+                            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                        </v-list-tile>
+                    </v-list>
+                </v-menu>
+            </v-flex>
+
+            <RangeSelectors />
+
+            <v-flex :class="[ $route.params.sort === 'all' ? 'xs10 md7 mx-5 mt-1' : 'xs2' ]" >
+                <v-text-field prepend-icon="search" label="Search" v-model="searchInput" @click="$router.push('/catalog/all')"></v-text-field>
             </v-flex>
         </v-layout>
     </v-container>
 </template>
 
 <script>
-export default {
-    name: 'searchArea'
+import RangeSelectors from './RangeSelectors'
 
+export default {
+    name: 'searchArea',
+    components: {
+        RangeSelectors
+    },
+    data () {
+        return {
+            menu: [
+                { title: 'all', path: '/catalog/all'},
+                { title: 'by alcohol level', path: '/catalog/abv'},
+                { title: 'by bitterness', path: '/catalog/ibu'},
+                { title: 'by color', path: '/catalog/ebc'}
+            ],
+            sortMenu: [
+                { title: 'desc' },
+                { title: 'asc' }
+            ],
+            searchInput: ''
+        }
+    }
 }
 </script>
 

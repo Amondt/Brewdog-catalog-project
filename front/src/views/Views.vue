@@ -1,8 +1,8 @@
 <template>
     <v-content>
         <v-container fluid fill-height>
-            <v-layout justify-center align-center>
-                <v-flex shrink>
+            <v-layout>
+                <v-flex>
                     <router-view key="routerView"/>
                 </v-flex>
             </v-layout>

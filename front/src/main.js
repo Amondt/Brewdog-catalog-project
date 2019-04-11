@@ -7,7 +7,10 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify, {
-    iconfont: 'md' // 'md' || 'mdi' || 'fa' || 'fa4'
+    iconfont: 'md', // 'md' || 'mdi' || 'fa' || 'fa4'
+    theme: {
+        primary: '#00BCD4'
+    }
 })
 
 import VueRouter from 'vue-router'
@@ -20,6 +23,11 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/',
+        name: 'catalog',
+        component: Catalog
+    },
+    {
+        path: '/catalog/:sort',
         name: 'catalog',
         component: Catalog
     },
