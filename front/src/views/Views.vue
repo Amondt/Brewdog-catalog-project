@@ -3,7 +3,7 @@
         <v-container fluid fill-height>
             <v-layout>
                 <v-flex>
-                    <router-view key="routerView" />
+                    <router-view key="routerView" @submit="emitSubmit" @sort="emitSort" :displayBeers="displayBeers" />
                 </v-flex>
             </v-layout>
         </v-container>
@@ -12,7 +12,20 @@
 
 <script>
 export default {
-    name: 'views'
+    name: 'views',
+    props: {
+        displayBeers: {
+            type: Array
+        }
+    },
+    methods: {
+        emitSubmit (selectorName, selectorRange) {
+            this.$emit('submit', selectorName, selectorRange)
+        },
+        emitSort(sort) {
+            this.$emit('sort', sort)
+        }
+    }
 }
 </script>
 

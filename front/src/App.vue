@@ -6,7 +6,7 @@
             
             <Toolbar @toggleDrawer="$refs.drawer.toggleDrawer()"/>
 
-            <Views />
+            <Views @submit="submit" @sort="sortBeers" :displayBeers="displayBeers" />
 
             <Vfooter />
         </v-app>
@@ -26,6 +26,77 @@ export default {
         Toolbar,
         Views,
         Vfooter
+    },
+    data () {
+        return {
+            errored: false,
+            sortType: 'asc',
+            selectorDatas: {
+                beerIndic: '',
+                min: '',
+                max: ''
+            },
+            dataBeers: [],
+            displayBeers: []
+        }
+    },
+    methods: {
+        submit(selectorName, selectorRange) {
+            this.selectorDatas.beerIndic = selectorName
+            this.selectorDatas.min = selectorRange[0]
+            this.selectorDatas.max = selectorRange[1]
+            this.displayRange()
+        },
+        sortBeers(sortType) {
+            if (sortType === 'asc') {
+                this.displayBeers.sort((a, b) => a[this.selectorDatas.beerIndic] < b[this.selectorDatas.beerIndic] ? -1 : 1)
+            } else if (sortType === 'desc') {
+                this.displayBeers.sort((a, b) => a[this.selectorDatas.beerIndic] > b[this.selectorDatas.beerIndic] ? -1 : 1)
+            }
+        },
+        displayRange() {
+            this.displayBeers = []
+            if (this.selectorDatas.beerIndic === 'abv') {
+                this.dataBeers.forEach(beer => {
+                    if (beer.abv >= this.selectorDatas.min && beer.abv <= this.selectorDatas.max) {
+                        this.displayBeers.push(beer)
+                    }
+                })
+            } else if (this.selectorDatas.beerIndic === 'ibu') {
+                this.dataBeers.forEach(beer => {
+                    if (beer.ibu >= this.selectorDatas.min && beer.ibu <= this.selectorDatas.max) {
+                        this.displayBeers.push(beer)
+                    }
+                })
+            } else if (this.selectorDatas.beerIndic === 'ebc') {
+                this.dataBeers.forEach(beer => {
+                    if (beer.ebc >= this.selectorDatas.min && beer.ebc <= this.selectorDatas.max) {
+                        this.displayBeers.push(beer)
+                    }
+                })
+            }
+        },
+        async getData() {
+            let endReq = false
+            let page = 1
+            while (!endReq) {
+                await this.axios
+                .get(`https://api.punkapi.com/v2/beers?page=${page}&per_page=25`)
+                .then(response => {
+                    this.dataBeers.push(...response.data)
+                    if (response.data.length == 0) { endReq = true }
+                    page += 1
+                })
+                .catch(error => { 
+                    console.log(error) 
+                    this.errored = true
+                    endReq = true
+                })
+            }
+        }
+    },
+    mounted() {
+        this.getData()
     }
 }
 </script>

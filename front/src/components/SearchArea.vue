@@ -10,13 +10,13 @@
 
         <v-layout class="mt-3">
             <v-flex xs2>
-                <v-menu offset-y class="mt-1">
+                <v-menu offset-y class="mt-3">
                     <v-btn flat slot="activator">
                         <span>Sort</span>
-                        <v-icon>expand_more</v-icon>
+                        <v-icon right>sort_by_alpha</v-icon>
                     </v-btn>
                     <v-list>
-                        <v-list-tile v-for="item in sortMenu" :key="item.title" @click="console.log('clicked')">
+                        <v-list-tile v-for="item in sortMenu" :key="item.title" @click="emitSort(item.title)">
                             <v-list-tile-title>{{ item.title }}</v-list-tile-title>
                         </v-list-tile>
                     </v-list>
@@ -26,7 +26,9 @@
             <RangeSelectors ref="rangeSelectors" @submit="emitSubmit"/>
 
             <v-flex :class="[ $route.params.sort === 'all' ? 'xs10 md7 mx-5 mt-1' : 'xs2' ]" >
-                <v-text-field prepend-icon="search" label="Search" v-model="searchInput" @click="$router.push('/catalog/all')"></v-text-field>
+                <v-form @submit.prevent="test">
+                    <v-text-field prepend-icon="search" label="Search" v-model="searchInput" @click="$router.push('/catalog/all')"></v-text-field>
+                </v-form>
             </v-flex>
         </v-layout>
     </v-container>
@@ -49,15 +51,21 @@ export default {
                 { title: 'by color', path: '/catalog/ebc'}
             ],
             sortMenu: [
-                { title: 'desc' },
-                { title: 'asc' }
+                { title: 'asc' },
+                { title: 'desc' }
             ],
             searchInput: '',
         }
     },
     methods: {
-        emitSubmit (selectorName, selectorRange) {
+        emitSubmit(selectorName, selectorRange) {
             this.$emit('submit', selectorName, selectorRange)
+        },
+        emitSort(sort) {
+            this.$emit('sort', sort)
+        },
+        test() {
+            console.log(this.searchInput)
         }
     }
 }
