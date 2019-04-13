@@ -1,6 +1,6 @@
 <template>
     <div>
-        <SearchArea @submit="emitSubmit" @sort="emitSort" />
+        <SearchArea @submit="emitSubmit" @sort="emitSort" @search="emitSearch" />
         <DisplayBox :displayBeers="displayBeers" />
     </div>
 </template>
@@ -26,6 +26,9 @@ export default {
         },
         emitSort(sort) {
             this.$emit('sort', sort)
+        },
+        emitSearch(input) {
+            this.$emit('search', input)
         }
     }
 }

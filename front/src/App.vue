@@ -6,7 +6,7 @@
             
             <Toolbar @toggleDrawer="$refs.drawer.toggleDrawer()"/>
 
-            <Views @submit="submit" @sort="sortBeers" :displayBeers="displayBeers" />
+            <Views @submit="submitRange" @sort="sortBeers" @search="submitSearch" :displayBeers="displayBeers" />
 
             <Vfooter />
         </v-app>
@@ -41,7 +41,7 @@ export default {
         }
     },
     methods: {
-        submit(selectorName, selectorRange) {
+        submitRange(selectorName, selectorRange) {
             this.selectorDatas.beerIndic = selectorName
             this.selectorDatas.min = selectorRange[0]
             this.selectorDatas.max = selectorRange[1]
@@ -53,6 +53,13 @@ export default {
             } else if (sortType === 'desc') {
                 this.displayBeers.sort((a, b) => a[this.selectorDatas.beerIndic] > b[this.selectorDatas.beerIndic] ? -1 : 1)
             }
+        },
+        submitSearch(input) {
+            console.log(input)
+            this.displaySearch()
+        },
+        displaySearch() {
+            console.log('search display')
         },
         displayRange() {
             this.displayBeers = []
@@ -97,6 +104,7 @@ export default {
     },
     mounted() {
         this.getData()
+        this.displayBeers = this.dataBeers
     }
 }
 </script>

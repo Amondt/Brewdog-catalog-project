@@ -26,7 +26,7 @@
             <RangeSelectors ref="rangeSelectors" @submit="emitSubmit"/>
 
             <v-flex :class="[ $route.params.sort === 'all' ? 'xs10 md7 mx-5 mt-1' : 'xs2' ]" >
-                <v-form @submit.prevent="test">
+                <v-form @submit.prevent="emitSearch(searchInput)">
                     <v-text-field prepend-icon="search" label="Search" v-model="searchInput" @click="$router.push('/catalog/all')"></v-text-field>
                 </v-form>
             </v-flex>
@@ -64,8 +64,8 @@ export default {
         emitSort(sort) {
             this.$emit('sort', sort)
         },
-        test() {
-            console.log(this.searchInput)
+        emitSearch(input) {
+            this.$emit('search', input)
         }
     }
 }

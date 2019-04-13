@@ -3,7 +3,7 @@
         <v-container fluid fill-height>
             <v-layout>
                 <v-flex>
-                    <router-view key="routerView" @submit="emitSubmit" @sort="emitSort" :displayBeers="displayBeers" />
+                    <router-view key="routerView" @submit="emitSubmit" @sort="emitSort" @search="emitSearch" :displayBeers="displayBeers" />
                 </v-flex>
             </v-layout>
         </v-container>
@@ -24,6 +24,9 @@ export default {
         },
         emitSort(sort) {
             this.$emit('sort', sort)
+        },
+        emitSearch(input) {
+            this.$emit('search', input)
         }
     }
 }
