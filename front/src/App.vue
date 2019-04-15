@@ -32,10 +32,12 @@ export default {
             errored: false,
             sortType: 'asc',
             selectorDatas: {
-                beerIndic: '',
+                beerIndic: 'name',
                 min: '',
                 max: ''
             },
+            searchInput: '',
+            beerAdded: false,
             dataBeers: [],
             displayBeers: []
         }
@@ -55,11 +57,59 @@ export default {
             }
         },
         submitSearch(input) {
-            console.log(input)
+            this.searchInput = input.replace(/\s/g, '').toLowerCase()
+            this.selectorDatas.beerIndic = 'name'
             this.displaySearch()
         },
         displaySearch() {
-            console.log('search display')
+            console.log('search : ' + this.searchInput)
+            this.beerAdded = false
+            this.displayBeers = []
+            this.dataBeers.forEach(beer => {
+                // By Name
+                if (beer.name && beer.name.replace(/\s/g, '').toLowerCase().includes(this.searchInput)) {
+                    this.displayBeers.push(beer)
+                    this.beerAdded = true
+                    console.log('by name added : ' + beer.name)
+                }
+                // By malt
+                if (!this.beerAdded) {
+                    beer.ingredients.malt.forEach(ingredient => {
+                        if (ingredient.name && ingredient.name.replace(/\s/g, '').toLowerCase().includes(this.searchInput) && !this.beerAdded) {
+                            this.displayBeers.push(beer)
+                            this.beerAdded = true
+                            console.log('by malt added : ' + beer.name)
+                        }
+                    })
+                } 
+                // By hops
+                if (!this.beerAdded) {
+                    beer.ingredients.hops.forEach(ingredient => {
+                        if (ingredient.name && ingredient.name.replace(/\s/g, '').toLowerCase().includes(this.searchInput) && !this.beerAdded) {
+                            this.displayBeers.push(beer)
+                            this.beerAdded = true
+                            console.log('by hops added : ' + beer.name)
+                        }
+                    })
+                } 
+                // By yeast
+                if (beer.ingredients.yeast && beer.ingredients.yeast.replace(/\s/g, '').toLowerCase().includes(this.searchInput) && !this.beerAdded) {
+                    this.displayBeers.push(beer)
+                    this.beerAdded = true
+                    console.log('by yeast added : ' + beer.name)
+                } 
+                // By food matching
+                if (!this.beerAdded) {
+                    beer.food_pairing.forEach(meal => {
+                        if (meal && meal.replace(/\s/g, '').toLowerCase().includes(this.searchInput) && !this.beerAdded) {
+                            this.displayBeers.push(beer)
+                            this.beerAdded = true
+                            console.log('by food added : ' + beer.name)
+                        }
+                    })
+                }
+                this.beerAdded = false
+            })
         },
         displayRange() {
             this.displayBeers = []

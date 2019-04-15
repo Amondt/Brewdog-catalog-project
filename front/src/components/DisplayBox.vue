@@ -1,17 +1,17 @@
 <template>
     <div>
         <v-container>
-            <div v-if="displayBeers && displayBeers.length" style="display: flex; flexFlow: row wrap;">
-                <div v-for="beer in displayBeers" :key="beer.name" style="margin: 10px 40px; width: 120px;">
+            <v-layout wrap justify-space-between v-if="displayBeers && displayBeers.length">
+                <v-flex v-for="beer in displayBeers" :key="beer.name" mx-3 my-3 xs2>
                     <p>{{ beer.name }}</p>
                     <p>ABV : {{ beer.abv }}</p>
                     <p>IBU : {{ beer.ibu }}</p>
                     <p>EBC : {{ beer.ebc }}</p>
-                </div>
-            </div>
-            <div v-else>
-                Loading...
-            </div>
+                </v-flex>
+            </v-layout>
+            <v-layout v-else>
+                No matching beers...
+            </v-layout>
         </v-container>
     </div>
 </template>

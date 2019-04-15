@@ -13,7 +13,7 @@
                 <v-menu offset-y class="mt-3">
                     <v-btn flat slot="activator">
                         <span>Sort</span>
-                        <v-icon right>sort_by_alpha</v-icon>
+                        <v-icon right>{{ $route.params.sort === 'all' ? 'sort_by_alpha' : 'import_export' }}</v-icon>
                     </v-btn>
                     <v-list>
                         <v-list-tile v-for="item in sortMenu" :key="item.title" @click="emitSort(item.title)">
@@ -66,6 +66,7 @@ export default {
         },
         emitSearch(input) {
             this.$emit('search', input)
+            this.searchInput = ''
         }
     }
 }
