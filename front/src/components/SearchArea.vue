@@ -22,12 +22,13 @@
                     </v-list>
                 </v-menu>
             </v-flex>
+            <v-spacer class="hidden-xs-and-up"></v-spacer>
 
             <v-flex v-if="$route.params.sort !== 'all'" xs12 md8 class="order-xs3">
                 <RangeSelectors ref="rangeSelectors" @submit="emitSubmit"/>
             </v-flex>
 
-            <v-flex :class="[ $route.params.sort === 'all' ? 'xs12 sm8 mx-3 mt-1 order-xs2' : 'xs2 order-sm3' ]" >
+            <v-flex :class="[ $route.params.sort === 'all' ? 'xs12 sm8 mx-3 mt-1 order-xs2' : 'xs5 sm2 order-md3' ]" >
                 <v-form @submit.prevent="emitSearch(searchInput)">
                     <v-text-field prepend-icon="search" label="Search" v-model="searchInput" @click="$router.push('/catalog/all')"></v-text-field>
                 </v-form>

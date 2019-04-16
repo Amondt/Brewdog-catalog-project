@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-layout row v-for="selector in rangeSelectors" :key="selector.name">
-            <v-flex v-if="$route.params.sort === selector.name" class="mx-5 mt-1">
+            <v-flex v-if="$route.params.sort === selector.name" class="mx-3 mt-1">
                 <v-layout row justify-space-between>
                     <v-flex shrink>
                         <v-btn flat class='mt-3' @click="emitSubmit(selector.name, selector.range)"><v-icon left>search</v-icon>Search</v-btn>
@@ -16,19 +16,19 @@
                         <v-switch class="mx-4" v-model="extreme" label="extreme" @change="updateRange"></v-switch>
                     </v-flex>
                 </v-layout>
-                <v-layout row v-if="ranges">
-                    <v-flex shrink style="width:100px">
+                <v-layout row wrap justify-space-between v-if="ranges">
+                    <v-flex shrink style="width:100px" class="ml-3 order-xs1 order-sm1 order-md1 order-lg1">
                         <v-text-field disabled v-model="selector.range[0]" class="mt-0" :prefix="selector.prefix" hide-details single-line type="number"></v-text-field>
                     </v-flex>
-                    <v-flex class="px-3">
+                    <v-flex class="px-3 order-xs3 order-sm3 order-md3 order-lg2">
                         <v-range-slider thumb-label v-model="selector.range" :max="extreme ? selector.maxX : selector.max" :min="extreme ? selector.minX : selector.min"></v-range-slider>
                     </v-flex>
-                    <v-flex shrink style="width:100px">
+                    <v-flex shrink style="width:100px" class="mr-3 order-xs2 order-sm2 order-md2 order-lg3">
                         <v-text-field disabled v-model="selector.range[1]" class="mt-0" :prefix="selector.prefix" hide-details single-line type="number"></v-text-field>
                     </v-flex>
                 </v-layout>
-                <v-layout v-if="$route.params.sort === 'ebc' && !extreme && ranges">
-                    <v-btn v-for="color in colorsEbc" :key="color.color" depressed :color="color.color" small fab @click="selector.range = color.range"></v-btn>
+                <v-layout row wrap justify-center v-if="$route.params.sort === 'ebc' && !extreme && ranges">
+                    <v-btn class="mx-1" v-for="color in colorsEbc" :key="color.color" depressed :color="color.color" small fab @click="selector.range = color.range"></v-btn>
                 </v-layout>
             </v-flex>
         </v-layout>
