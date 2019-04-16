@@ -1,6 +1,6 @@
 <template>
-    <v-flex v-if="$route.params.sort !== 'all'">
-        <v-layout row v-for="selector in rangeSelectors" :key="selector.name" md8>
+    <div>
+        <v-layout row v-for="selector in rangeSelectors" :key="selector.name">
             <v-flex v-if="$route.params.sort === selector.name" class="mx-5 mt-1">
                 <v-layout row justify-space-between>
                     <v-flex shrink>
@@ -32,7 +32,7 @@
                 </v-layout>
             </v-flex>
         </v-layout>
-    </v-flex>
+    </div>
 </template>
 
 <script>

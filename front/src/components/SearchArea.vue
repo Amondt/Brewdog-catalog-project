@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-layout row justify-center>
+        <v-layout row wrap justify-center>
             <v-flex v-for="item in menu" :key="item.title" shrink>
                 <v-btn flat router :to="item.path" @click="$refs.rangeSelectors.resetRangesChoices()">
                     {{ item.title }}
@@ -8,7 +8,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout class="mt-3">
+        <v-layout class="mt-3" row wrap>
             <v-flex xs2>
                 <v-menu offset-y class="mt-3">
                     <v-btn flat slot="activator">
@@ -23,9 +23,11 @@
                 </v-menu>
             </v-flex>
 
-            <RangeSelectors ref="rangeSelectors" @submit="emitSubmit"/>
+            <v-flex v-if="$route.params.sort !== 'all'" xs12 md8 class="order-xs3">
+                <RangeSelectors ref="rangeSelectors" @submit="emitSubmit"/>
+            </v-flex>
 
-            <v-flex :class="[ $route.params.sort === 'all' ? 'xs10 md7 mx-5 mt-1' : 'xs2' ]" >
+            <v-flex :class="[ $route.params.sort === 'all' ? 'xs12 sm8 mx-3 mt-1 order-xs2' : 'xs2 order-sm3' ]" >
                 <v-form @submit.prevent="emitSearch(searchInput)">
                     <v-text-field prepend-icon="search" label="Search" v-model="searchInput" @click="$router.push('/catalog/all')"></v-text-field>
                 </v-form>
