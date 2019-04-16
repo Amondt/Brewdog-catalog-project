@@ -33,7 +33,7 @@ export default {
 #percent-alc-chip {
     position: absolute;
     z-index: 1;
-    top: 60px;
-    right: 5px;
+    top: 65px;
+    right: 2px;
 }
 </style>
