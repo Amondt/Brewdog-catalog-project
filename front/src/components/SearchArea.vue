@@ -1,19 +1,17 @@
 <template>
     <v-container>
-        <v-layout row wrap justify-center>
-            <v-flex v-for="item in menu" :key="item.title" shrink>
-                <v-btn flat router :to="item.path" @click="$refs.rangeSelectors.resetRangesChoices()">
+        <v-tabs centered mandatory color="transparent">
+            <v-tab v-for="item in menu" :key="item.title" router :to="item.path" @click="$refs.rangeSelectors ? $refs.rangeSelectors.resetRangesChoices() : null">
                     {{ item.title }}
-                </v-btn>
-            </v-flex>
-        </v-layout>
+            </v-tab>
+        </v-tabs>
 
         <v-layout class="mt-3" row wrap>
             <v-flex xs2>
                 <v-menu offset-y class="mt-3">
                     <v-btn flat slot="activator">
                         <span>Sort</span>
-                        <v-icon right>{{ $route.params.sort === 'all' ? 'sort_by_alpha' : 'import_export' }}</v-icon>
+                        <v-icon right>{{ $route.params.sort === 'all' || !$route.params.sort ? 'sort_by_alpha' : 'import_export' }}</v-icon>
                     </v-btn>
                     <v-list>
                         <v-list-tile v-for="item in sortMenu" :key="item.title" @click="emitSort(item.title)">
@@ -22,13 +20,12 @@
                     </v-list>
                 </v-menu>
             </v-flex>
-            <v-spacer class="hidden-xs-and-up"></v-spacer>
 
             <v-flex v-if="$route.params.sort !== 'all'" xs12 md8 class="order-xs3">
                 <RangeSelectors ref="rangeSelectors" @submit="emitSubmit"/>
             </v-flex>
 
-            <v-flex :class="[ $route.params.sort === 'all' ? 'xs12 sm8 mx-3 mt-1 order-xs2' : 'xs5 sm2 order-md3' ]" >
+            <v-flex :class="[ $route.params.sort === 'all' || !$route.params.sort ? 'xs12 sm8 mx-3 mt-1' : 'xs4 sm2 order-md3' ]" >
                 <v-form @submit.prevent="emitSearch(searchInput)">
                     <v-text-field prepend-icon="search" label="Search" v-model="searchInput" @click="$router.push('/catalog/all')"></v-text-field>
                 </v-form>
