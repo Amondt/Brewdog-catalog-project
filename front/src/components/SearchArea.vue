@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-tabs centered mandatory color="transparent">
+        <v-tabs centered mandatory color="transparent" wrap>
             <v-tab v-for="item in menu" :key="item.title" router :to="item.path" @click="$refs.rangeSelectors ? $refs.rangeSelectors.resetRangesChoices() : null">
                     {{ item.title }}
             </v-tab>

@@ -1,6 +1,5 @@
 <template>
     <v-navigation-drawer clipped fixed v-model="drawer" :mini-variant="mini" app>
-
         <v-list class="mt-1">
             <v-list-tile v-if="mini" @click.stop="mini = !mini">
                 <v-list-tile-action>
