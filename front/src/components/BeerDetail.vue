@@ -8,13 +8,32 @@
         </v-card>
         <v-dialog v-model="detailDisplay" max-width="500">
             <v-card>
-                <v-card-title class="title grey darken-2 grey--text text--lighten-2 text-xs-center">{{ beer.name }}</v-card-title>
+                <v-layout>
+                    <v-flex>
+                        <v-card-title class="title grey darken-2 grey--text text--lighten-2 text-xs-center"><span>{{ beer.name }}</span></v-card-title>
+                    </v-flex>
+
+                    <v-flex shrink class="grey darken-2">
+                        <v-menu open-on-hover bottom offset-y>
+                            <template v-slot:activator="{ on }">
+                                <v-btn flat v-on='on'>
+                                    Food Pairing
+                                </v-btn>
+                            </template>
+                            <v-list>
+                                <v-list-tile v-for="food in beer.food_pairing" :key="food">
+                                    {{ food }}
+                                </v-list-tile>
+                            </v-list>
+                        </v-menu>
+                    </v-flex>
+                </v-layout>
 
                 <v-card-text class="grey--text text--lighten-2 subheading text-xs-left">{{ beer.tagline }}</v-card-text>
 
                 <v-divider></v-divider>
 
-                <v-layout mt-3>
+                <v-layout my-3>
                     <v-flex xs4 align-self-center>
                         <img height="150" :src="beer.image_url" :alt="beer.name + ' | ' + beer.image_url">
                     </v-flex>
@@ -24,55 +43,79 @@
                     </v-flex>
                 </v-layout>
 
-                <v-layout justify-space-between>
-                    <v-flex>
-                        <v-chip disabled class="grey--text text--lighten-2">ABV: {{ beer.abv }} %</v-chip>
+                <v-divider></v-divider>
+
+                <v-layout justify-center mt-3>
+                    <v-flex mx-1 shrink>
+                        <v-chip label disabled class="grey--text text--lighten-2">ABV: {{ beer.abv }}%</v-chip>
                     </v-flex>
 
-                    <v-flex>
-                        <v-chip disabled class="grey--text text--lighten-2">IBU: {{ beer.ibu }}</v-chip>
+                    <v-flex mx-1 shrink>
+                        <v-chip label disabled class="grey--text text--lighten-2">IBU: {{ beer.ibu }}</v-chip>
                     </v-flex>
 
-                    <v-flex>
-                        <v-chip disabled class="grey--text text--lighten-2">EBC: {{ beer.ebc }}</v-chip>
-                    </v-flex>
-                </v-layout>
-
-                <v-layout mt-3>
-                    <v-flex xs6>
-                        <v-expansion-panel>
-                            <v-expansion-panel-content>
-                                <template v-slot:header>
-                                    <div class="grey--text text--lighten-2">malts</div>
-                                </template>
-                                <v-card flat>
-                                    <v-card-text v-for="(malt, index) in malts" :key="index" class="grey--text text--lighten-2">
-                                        {{ malt }}
-                                    </v-card-text>
-                                </v-card>
-                            </v-expansion-panel-content>
-                        </v-expansion-panel>
-                    </v-flex>
-
-                    <v-flex xs6>
-                        <v-expansion-panel>
-                            <v-expansion-panel-content>
-                                <template v-slot:header>
-                                    <div class="grey--text text--lighten-2">hops</div>
-                                </template>
-                                <v-card>
-                                    <v-card-text v-for="(hop, index) in hops" :key="index" class="grey--text text--lighten-2">
-                                        {{ hop }}
-                                    </v-card-text>
-                                </v-card>
-                            </v-expansion-panel-content>
-                        </v-expansion-panel>
+                    <v-flex mx-1 shrink>
+                        <v-chip label disabled class="grey--text text--lighten-2">EBC: {{ beer.ebc }}</v-chip>
                     </v-flex>
                 </v-layout>
 
-                <v-card-text class="grey--text text--lighten-2">yeast: {{ beer.ingredients.yeast }}</v-card-text>
+                <v-layout mt-3 justify-center>
+                    <v-flex shrink mx-3>
+                        <v-menu open-on-hover bottom offset-y transition="slide-y-transition" full-width>
+                            <template v-slot:activator="{ on }">
+                                <v-btn flat v-on='on'>
+                                    malts
+                                </v-btn>
+                            </template>
+                            <v-list>
+                                <v-list-tile v-for="(malt, index) in malts" :key="index">
+                                    {{ malt }}
+                                </v-list-tile>
+                            </v-list>
+                        </v-menu>
+                    </v-flex>
 
-                <v-card-text class="grey--text text--lighten-2">tips: {{ beer.brewers_tips }}</v-card-text>
+                    <v-flex shrink mx-3>
+                        <v-menu open-on-hover bottom offset-y transition="slide-y-transition">
+                            <template v-slot:activator="{ on }">
+                                <v-btn flat v-on='on'>
+                                    hops
+                                </v-btn>
+                            </template>
+                            <v-list>
+                                <v-list-tile v-for="(hop, index) in hops" :key="index">
+                                    {{ hop }}
+                                </v-list-tile>
+                            </v-list>
+                        </v-menu>
+                    </v-flex>
+
+                    <v-flex shrink mx-3>
+                        <v-menu open-on-hover bottom offset-y transition="slide-y-transition">
+                            <template v-slot:activator="{ on }">
+                                <v-btn flat v-on='on'>
+                                    yeast
+                                </v-btn>
+                            </template>
+                            <v-list>
+                                <v-list-tile>
+                                    {{ beer.ingredients.yeast }}
+                                </v-list-tile>
+                            </v-list>
+                        </v-menu>
+                    </v-flex>
+                </v-layout>
+
+                <v-layout mt-2>
+                    <v-flex px-3>
+                        <v-card-text class="grey--text text--lighten-2">
+                            <div>
+                                <p class="text-xs-center subheading">Brewers tip</p>
+                                <p class="text-xs-left body-1">{{ beer.brewers_tips }}</p>
+                            </div>
+                        </v-card-text>
+                    </v-flex>
+                </v-layout>
             </v-card>
         </v-dialog>
     </div>

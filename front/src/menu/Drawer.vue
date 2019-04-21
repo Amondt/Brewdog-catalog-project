@@ -40,7 +40,7 @@ export default {
             drawer: false,
             mini: false,
             menu: [
-                { name: 'Catalog', icon: 'folder', path: '/catalog/all' },
+                { name: 'Catalog', icon: 'folder', path: '/catalog' },
                 { name: 'About', icon: 'weekend', path: '/about' }
             ]
         }
