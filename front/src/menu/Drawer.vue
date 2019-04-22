@@ -8,7 +8,13 @@
             </v-list-tile>
 
             <v-list-tile v-else>
-                <v-layout justify-end>
+                <v-layout>
+                    <v-flex shrink>
+                        <v-avatar :tile="tile" :size="avatarSize">
+                            <img src="../assets/brewdog-logo.png" alt="brewdog">
+                        </v-avatar>
+                    </v-flex>
+                    <v-spacer></v-spacer>
                     <v-flex shrink>
                         <v-btn flat @click.stop="mini = !mini">
                             <v-icon >chevron_left</v-icon>
