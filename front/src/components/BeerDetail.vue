@@ -2,18 +2,18 @@
     <div>
         <v-card flat hover style="height:100%;" @click.stop="detailDisplay = true">
             <v-chip id="percent-alc-chip" disabled label color="primary" text-color="white">{{ beer.abv }} %</v-chip>
-            <v-card-title class="title grey darken-2 grey--text text--lighten-2 text-xs-left" style="height:80px;overflow:hidden;">{{ beer.name }}</v-card-title>
+            <v-card-title class="title text-xs-left" style="height:80px;overflow:hidden;">{{ beer.name }}</v-card-title>
             <img class="mt-5 mb-1 grey--text text--lighten-2" height="150" :src="beer.image_url ? beer.image_url : 'https://images.punkapi.com/v2/198.png'">
-            <v-card-text class="grey--text text--lighten-2 subheading">{{ beer.tagline }}</v-card-text>
+            <v-card-text class="subheading">{{ beer.tagline }}</v-card-text>
         </v-card>
         <v-dialog v-model="detailDisplay" max-width="500">
             <v-card>
                 <v-layout>
                     <v-flex>
-                        <v-card-title class="title grey darken-2 grey--text text--lighten-2 text-xs-center"><span>{{ beer.name }}</span></v-card-title>
+                        <v-card-title class="title text-xs-center"><span>{{ beer.name }}</span></v-card-title>
                     </v-flex>
 
-                    <v-flex shrink class="grey darken-2">
+                    <v-flex shrink>
                         <v-menu open-on-hover bottom offset-y>
                             <template v-slot:activator="{ on }">
                                 <v-btn flat v-on='on'>
@@ -29,7 +29,7 @@
                     </v-flex>
                 </v-layout>
 
-                <v-card-text class="grey--text text--lighten-2 subheading text-xs-left">{{ beer.tagline }}</v-card-text>
+                <v-card-text class="subheading text-xs-left">{{ beer.tagline }}</v-card-text>
 
                 <v-divider></v-divider>
 
@@ -39,7 +39,7 @@
                     </v-flex>
 
                     <v-flex xs8 px-3>
-                        <v-card-text text-xs-left class="grey--text text--lighten-2 body-1 text-xs-left">{{ beer.description }}</v-card-text>
+                        <v-card-text text-xs-left class="body-1 text-xs-left">{{ beer.description }}</v-card-text>
                     </v-flex>
                 </v-layout>
 
@@ -47,15 +47,15 @@
 
                 <v-layout justify-center mt-3>
                     <v-flex mx-1 shrink>
-                        <v-chip label disabled class="grey--text text--lighten-2">ABV: {{ beer.abv }}%</v-chip>
+                        <v-chip label disabled>ABV: {{ beer.abv }}%</v-chip>
                     </v-flex>
 
                     <v-flex mx-1 shrink>
-                        <v-chip label disabled class="grey--text text--lighten-2">IBU: {{ beer.ibu }}</v-chip>
+                        <v-chip label disabled>IBU: {{ beer.ibu }}</v-chip>
                     </v-flex>
 
                     <v-flex mx-1 shrink>
-                        <v-chip label disabled class="grey--text text--lighten-2">EBC: {{ beer.ebc }}</v-chip>
+                        <v-chip label disabled>EBC: {{ beer.ebc }}</v-chip>
                     </v-flex>
                 </v-layout>
 
@@ -108,7 +108,7 @@
 
                 <v-layout mt-2>
                     <v-flex px-3>
-                        <v-card-text class="grey--text text--lighten-2">
+                        <v-card-text>
                             <div>
                                 <p class="text-xs-center subheading">Brewers tip</p>
                                 <p class="text-xs-left body-1">{{ beer.brewers_tips }}</p>
