@@ -2,7 +2,7 @@
 
 Personal project using the Punk API (Brewdog catalog)
 
-## Technologies
+## Technologies used
 
 - Vue
 - Vuetify
