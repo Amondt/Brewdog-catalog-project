@@ -51,7 +51,8 @@ const routes = [
         path: '/about',
         name: 'about',
         component: About
-    }
+    },
+    { path: '*', component: Catalog }
 ]
 
 const router = new VueRouter({
