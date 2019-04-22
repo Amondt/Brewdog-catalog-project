@@ -3,7 +3,7 @@
         <v-container fluid fill-height>
             <v-layout>
                 <v-flex>
-                    <router-view key="routerView" @submit="emitSubmit" @sort="emitSort" @search="emitSearch" :loadedBeers="loadedBeers" />
+                    <router-view key="routerView" @submit="emitSubmit" @sort="emitSort" @search="emitSearch" :loadedBeers="loadedBeers" :loading="loading" />
                 </v-flex>
             </v-layout>
         </v-container>
@@ -16,7 +16,8 @@ export default {
     props: {
         loadedBeers: {
             type: Array
-        }
+        },
+        loading: { type: Boolean }
     },
     methods: {
         emitSubmit (selectorName, selectorRange) {

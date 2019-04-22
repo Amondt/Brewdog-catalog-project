@@ -6,8 +6,8 @@
             
             <Toolbar @toggleDrawer="$refs.drawer.toggleDrawer()"/>
 
-            <Views @submit="submitRange" @sort="sortBeers" @search="submitSearch" :loadedBeers="loadedBeers" />
-
+            <Views @submit="submitRange" @sort="sortBeers" @search="submitSearch" :loadedBeers="loadedBeers" :loading="loading" />
+            
             <Vfooter />
         </v-app>
     </div>
@@ -187,6 +187,9 @@ export default {
 </script>
 
 <style>
+.v-progress-circular {
+    margin: 1rem
+}
 * {
     box-sizing: border-box;
     margin: 0;

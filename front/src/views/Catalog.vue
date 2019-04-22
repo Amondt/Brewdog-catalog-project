@@ -1,7 +1,7 @@
 <template>
     <div>
         <SearchArea @submit="emitSubmit" @sort="emitSort" @search="emitSearch" />
-        <DisplayBox :loadedBeers="loadedBeers" />
+        <DisplayBox :loadedBeers="loadedBeers" :loading="loading" />
     </div>
 </template>
 
@@ -18,7 +18,8 @@ export default {
     props: {
         loadedBeers: {
             type: Array
-        }
+        },
+        loading: { type: Boolean }
     },
     methods: {
         emitSubmit (selectorName, selectorRange) {
