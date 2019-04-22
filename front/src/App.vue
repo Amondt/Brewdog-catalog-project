@@ -6,7 +6,7 @@
             
             <Toolbar @toggleDrawer="$refs.drawer.toggleDrawer()"/>
 
-            <Views @submit="submitRange" @sort="sortBeers" @search="submitSearch" :displayBeers="displayBeers" />
+            <Views @submit="submitRange" @sort="sortBeers" @search="submitSearch" :loadedBeers="loadedBeers" />
 
             <Vfooter />
         </v-app>
@@ -39,7 +39,10 @@ export default {
             searchInput: '',
             beerAdded: false,
             dataBeers: [],
-            displayBeers: []
+            displayBeers: [],
+            loading: false,
+            nextDisplay: 0,
+            loadedBeers: []
         }
     },
     methods: {
@@ -51,9 +54,9 @@ export default {
         },
         sortBeers(sortType) {
             if (sortType === 'asc') {
-                this.displayBeers.sort((a, b) => a[this.selectorDatas.beerIndic] < b[this.selectorDatas.beerIndic] ? -1 : 1)
+                this.loadedBeers.sort((a, b) => a[this.selectorDatas.beerIndic] < b[this.selectorDatas.beerIndic] ? -1 : 1)
             } else if (sortType === 'desc') {
-                this.displayBeers.sort((a, b) => a[this.selectorDatas.beerIndic] > b[this.selectorDatas.beerIndic] ? -1 : 1)
+                this.loadedBeers.sort((a, b) => a[this.selectorDatas.beerIndic] > b[this.selectorDatas.beerIndic] ? -1 : 1)
             }
         },
         submitSearch(input) {
@@ -65,6 +68,8 @@ export default {
             console.log('search : ' + this.searchInput)
             this.beerAdded = false
             this.displayBeers = []
+            this.loadedBeers = []
+            this.nextDisplay = 0
             this.dataBeers.forEach(beer => {
                 // By Name
                 if (beer.name && beer.name.replace(/\s/g, '').toLowerCase().includes(this.searchInput)) {
@@ -110,9 +115,12 @@ export default {
                 }
                 this.beerAdded = false
             })
+            this.loadMore()
         },
         displayRange() {
             this.displayBeers = []
+            this.loadedBeers = []
+            this.nextDisplay = 0
             if (this.selectorDatas.beerIndic === 'abv') {
                 this.dataBeers.forEach(beer => {
                     if (beer.abv >= this.selectorDatas.min && beer.abv <= this.selectorDatas.max) {
@@ -132,6 +140,19 @@ export default {
                     }
                 })
             }
+            this.loadMore()
+        },
+        loadMore() {
+            this.loading = true
+            setTimeout(e => {
+                for (var i = 0; i < 20; i++) {
+                    if (this.displayBeers[this.nextDisplay]) {
+                        this.loadedBeers.push(this.displayBeers[this.nextDisplay])
+                        this.nextDisplay++
+                    }
+                }
+                this.loading = false
+            }, 200)
         },
         async getData() {
             let endReq = false
@@ -155,6 +176,12 @@ export default {
     mounted() {
         this.getData()
         this.displayBeers = this.dataBeers
+        window.addEventListener('scroll', e => {
+            if(window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+                this.loadMore()
+            }
+        })
+        this.loadMore()
     }
 }
 </script>

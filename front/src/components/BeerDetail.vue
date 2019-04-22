@@ -3,7 +3,7 @@
         <v-card flat hover style="height:100%;" @click.stop="detailDisplay = true">
             <v-chip id="percent-alc-chip" disabled label color="primary" text-color="white">{{ beer.abv }} %</v-chip>
             <v-card-title class="title grey darken-2 grey--text text--lighten-2 text-xs-left" style="height:80px;overflow:hidden;">{{ beer.name }}</v-card-title>
-            <img class="mt-5 mb-1 grey--text text--lighten-2" height="150" :src="beer.image_url ? beer.image_url : ''">
+            <img class="mt-5 mb-1 grey--text text--lighten-2" height="150" :src="beer.image_url ? beer.image_url : 'https://images.punkapi.com/v2/198.png'">
             <v-card-text class="grey--text text--lighten-2 subheading">{{ beer.tagline }}</v-card-text>
         </v-card>
         <v-dialog v-model="detailDisplay" max-width="500">
@@ -35,7 +35,7 @@
 
                 <v-layout my-3>
                     <v-flex xs4 align-self-center>
-                        <img height="150" :src="beer.image_url" :alt="beer.name + ' | ' + beer.image_url">
+                        <img height="150" :src="beer.image_url ? beer.image_url : 'https://images.punkapi.com/v2/198.png'" :alt="beer.name + ' | ' + beer.image_url">
                     </v-flex>
 
                     <v-flex xs8 px-3>

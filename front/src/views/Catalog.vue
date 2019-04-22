@@ -1,7 +1,7 @@
 <template>
     <div>
         <SearchArea @submit="emitSubmit" @sort="emitSort" @search="emitSearch" />
-        <DisplayBox :displayBeers="displayBeers" />
+        <DisplayBox :loadedBeers="loadedBeers" />
     </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
         DisplayBox
     },
     props: {
-        displayBeers: {
+        loadedBeers: {
             type: Array
         }
     },

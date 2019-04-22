@@ -5,7 +5,6 @@ Vue.config.productionTip = false
 
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-
 Vue.use(Vuetify, {
     iconfont: 'md', // 'md' || 'mdi' || 'fa' || 'fa4'
     theme: {
@@ -13,16 +12,16 @@ Vue.use(Vuetify, {
     }
 })
 
+var infiniteScroll =  require('vue-infinite-scroll');
+Vue.use(infiniteScroll)
+
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-
 Vue.use(VueAxios, axios)
 
 import VueRouter from 'vue-router'
-
 import Catalog from './views/Catalog.vue'
 import About from './views/About.vue'
-
 Vue.use(VueRouter)
 
 const routes = [

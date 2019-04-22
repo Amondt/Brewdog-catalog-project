@@ -3,7 +3,7 @@
         <v-container fluid fill-height>
             <v-layout>
                 <v-flex>
-                    <router-view key="routerView" @submit="emitSubmit" @sort="emitSort" @search="emitSearch" :displayBeers="displayBeers" />
+                    <router-view key="routerView" @submit="emitSubmit" @sort="emitSort" @search="emitSearch" :loadedBeers="loadedBeers" />
                 </v-flex>
             </v-layout>
         </v-container>
@@ -14,7 +14,7 @@
 export default {
     name: 'views',
     props: {
-        displayBeers: {
+        loadedBeers: {
             type: Array
         }
     },
