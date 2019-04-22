@@ -10,13 +10,13 @@
             <v-card>
                 <v-layout>
                     <v-flex>
-                        <v-card-title class="title text-xs-center"><span>{{ beer.name }}</span></v-card-title>
+                        <v-card-title class="title text-xs-left"><span>{{ beer.name }}</span></v-card-title>
                     </v-flex>
 
                     <v-flex shrink>
                         <v-menu open-on-hover bottom offset-y>
                             <template v-slot:activator="{ on }">
-                                <v-btn flat v-on='on'>
+                                <v-btn class="ma-3" depressed v-on='on'>
                                     Food Pairing
                                 </v-btn>
                             </template>
@@ -47,15 +47,15 @@
 
                 <v-layout justify-center mt-3>
                     <v-flex mx-1 shrink>
-                        <v-chip label disabled>ABV: {{ beer.abv }}%</v-chip>
+                        <v-chip label>ABV: {{ beer.abv }}%</v-chip>
                     </v-flex>
 
                     <v-flex mx-1 shrink>
-                        <v-chip label disabled>IBU: {{ beer.ibu }}</v-chip>
+                        <v-chip label>IBU: {{ beer.ibu }}</v-chip>
                     </v-flex>
 
                     <v-flex mx-1 shrink>
-                        <v-chip label disabled>EBC: {{ beer.ebc }}</v-chip>
+                        <v-chip label>EBC: {{ beer.ebc }}</v-chip>
                     </v-flex>
                 </v-layout>
 
@@ -63,7 +63,7 @@
                     <v-flex shrink mx-3>
                         <v-menu open-on-hover bottom offset-y transition="slide-y-transition" full-width>
                             <template v-slot:activator="{ on }">
-                                <v-btn flat v-on='on'>
+                                <v-btn depressed v-on='on'>
                                     malts
                                 </v-btn>
                             </template>
@@ -78,7 +78,7 @@
                     <v-flex shrink mx-3>
                         <v-menu open-on-hover bottom offset-y transition="slide-y-transition">
                             <template v-slot:activator="{ on }">
-                                <v-btn flat v-on='on'>
+                                <v-btn depressed v-on='on'>
                                     hops
                                 </v-btn>
                             </template>
@@ -93,7 +93,7 @@
                     <v-flex shrink mx-3>
                         <v-menu open-on-hover bottom offset-y transition="slide-y-transition">
                             <template v-slot:activator="{ on }">
-                                <v-btn flat v-on='on'>
+                                <v-btn depressed v-on='on'>
                                     yeast
                                 </v-btn>
                             </template>

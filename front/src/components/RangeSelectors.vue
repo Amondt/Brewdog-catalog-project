@@ -13,7 +13,7 @@
                         </v-btn>
                     </v-flex>
                     <v-flex shrink>
-                        <v-switch class="mx-4" v-model="extreme" label="extreme" @change="updateRange"></v-switch>
+                        <v-switch class="mx-4" v-model="extreme" color="primary" label="extreme" @change="updateRange"></v-switch>
                     </v-flex>
                 </v-layout>
                 <v-layout row wrap justify-space-between v-if="ranges">
