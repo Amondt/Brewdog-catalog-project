@@ -12,6 +12,7 @@
     "core-js": "^2.6.5",
     "vue": "^2.6.6",
     "vue-axios": "^2.1.4",
+    "vue-custom-scrollbar": "^1.0.0",
     "vue-infinite-loading": "^2.4.4",
     "vue-infinite-scroll": "^2.0.2",
     "vue-router": "^3.0.3",

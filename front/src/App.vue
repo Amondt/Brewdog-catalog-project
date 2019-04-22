@@ -1,10 +1,10 @@
 <template>
     <div id="app">
-        <v-app id="inspire" dark>
+        <v-app id="inspire" :dark="darkTheme">
 
             <Drawer ref="drawer"/>
             
-            <Toolbar @toggleDrawer="$refs.drawer.toggleDrawer()"/>
+            <Toolbar @toggleDrawer="$refs.drawer.toggleDrawer()" @toggleTheme="darkTheme = !darkTheme" />
 
             <Views @submit="submitRange" @sort="sortBeers" @search="submitSearch" :loadedBeers="loadedBeers" :loading="loading" />
             
@@ -29,6 +29,7 @@ export default {
     },
     data () {
         return {
+            darkTheme: true,
             errored: false,
             sortType: 'asc',
             selectorDatas: {
@@ -187,18 +188,37 @@ export default {
 </script>
 
 <style>
-.v-progress-circular {
-    margin: 1rem
-}
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
+body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 #app {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
+}
+
+body::-webkit-scrollbar {
+    width: 0.7em;
+}
+
+::-webkit-scrollbar-track {
+    background: #424242;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
 }
 </style>
