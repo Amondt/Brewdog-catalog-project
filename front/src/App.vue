@@ -8,7 +8,7 @@
 
             <Views @submit="submitRange" @sort="sortBeers" @search="submitSearch" :loadedBeers="loadedBeers" :loading="loading" />
             
-            <Vfooter />
+            <Vfooter :darkTheme="darkTheme" />
         </v-app>
     </div>
 </template>
